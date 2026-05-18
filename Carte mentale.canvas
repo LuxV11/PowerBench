@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"id":"004b82a73ded4e7f","type":"text","text":"Maria DB","x":40,"y":-300,"width":250,"height":60},
+		{"id":"f4aecc58091ec639","type":"text","text":"PHP MY ADMIN","x":40,"y":-220,"width":250,"height":60},
+		{"id":"fd4a9c8567a9d3f9","type":"text","text":"Base de Donnée\n","x":-400,"y":-220,"width":250,"height":60},
+		{"id":"f46b968900520471","type":"text","text":"MY SQL","x":40,"y":-120,"width":250,"height":60},
+		{"id":"79059af0ce062b71","type":"text","text":"Projet de Sécurisation du banc de puissance","x":-1100,"y":-220,"width":250,"height":60},
+		{"id":"65d941a78b54a203","type":"text","text":"Capteur\n","x":-400,"y":-560,"width":250,"height":60},
+		{"id":"0b20b2e5f09cbeb5","type":"text","text":"Capteur Infrarouge","x":40,"y":-680,"width":250,"height":60},
+		{"id":"fbe2f985414724a3","type":"text","text":"Capteur Gyroscopique","x":40,"y":-760,"width":250,"height":60},
+		{"id":"27d934e70c09b4c3","type":"text","text":"Capteur de CO2\n","x":40,"y":-590,"width":250,"height":60},
+		{"id":"46d30f3736d460f7","type":"text","text":"Indicateur D'arrêt","x":-400,"y":-400,"width":250,"height":60},
+		{"id":"e599b699d33cfb9d","type":"text","text":"Biper","x":40,"y":-500,"width":250,"height":60},
+		{"id":"f9e73e51dbc2bad9","type":"text","text":"Lumière rouge","x":40,"y":-430,"width":250,"height":60},
+		{"id":"bc132bd64279805c","x":-400,"y":0,"width":250,"height":60,"type":"text","text":"Choix de la maquette \n"},
+		{"id":"818fc35a8904563b","x":40,"y":0,"width":250,"height":60,"type":"text","text":"Farbriquer sois même"},
+		{"id":"b8d5bcd6909f1b07","x":40,"y":80,"width":250,"height":50,"type":"text","text":"Acheter un modèle"}
+	],
+	"edges":[
+		{"id":"ce19b641c208695e","fromNode":"fd4a9c8567a9d3f9","fromSide":"right","toNode":"004b82a73ded4e7f","toSide":"left"},
+		{"id":"7158f75882a3dc38","fromNode":"fd4a9c8567a9d3f9","fromSide":"right","toNode":"f4aecc58091ec639","toSide":"left"},
+		{"id":"2edf0e4ceb83bf40","fromNode":"fd4a9c8567a9d3f9","fromSide":"right","toNode":"f46b968900520471","toSide":"left"},
+		{"id":"d8ea8f37e3bd62fc","fromNode":"79059af0ce062b71","fromSide":"right","toNode":"fd4a9c8567a9d3f9","toSide":"left"},
+		{"id":"813fcd6593094c42","fromNode":"79059af0ce062b71","fromSide":"right","toNode":"65d941a78b54a203","toSide":"left"},
+		{"id":"bc527b765f529911","fromNode":"65d941a78b54a203","fromSide":"right","toNode":"27d934e70c09b4c3","toSide":"left"},
+		{"id":"fb811471517810cb","fromNode":"65d941a78b54a203","fromSide":"right","toNode":"0b20b2e5f09cbeb5","toSide":"left"},
+		{"id":"eaba1b83c1cafe30","fromNode":"65d941a78b54a203","fromSide":"right","toNode":"fbe2f985414724a3","toSide":"left"},
+		{"id":"01a4743dc1702368","fromNode":"79059af0ce062b71","fromSide":"right","toNode":"46d30f3736d460f7","toSide":"left"},
+		{"id":"f1bb45274b95e838","fromNode":"46d30f3736d460f7","fromSide":"right","toNode":"e599b699d33cfb9d","toSide":"left"},
+		{"id":"3090595970d271a7","fromNode":"46d30f3736d460f7","fromSide":"right","toNode":"f9e73e51dbc2bad9","toSide":"left"},
+		{"id":"b279de9f4344cb7f","fromNode":"79059af0ce062b71","fromSide":"right","toNode":"bc132bd64279805c","toSide":"left"},
+		{"id":"ac3adb5a9d2f33a7","fromNode":"bc132bd64279805c","fromSide":"right","toNode":"818fc35a8904563b","toSide":"left"},
+		{"id":"10d287da1dd438e6","fromNode":"bc132bd64279805c","fromSide":"right","toNode":"b8d5bcd6909f1b07","toSide":"left"}
+	]
+}
