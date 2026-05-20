@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RS Tronic — Admin</title>
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/charts.css" />
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/logo.png" alt="RS Tronic" />
+      <div class="sidebar-logo-sub">IoT Monitor</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Monitor</div>
+      <a href="../index.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="devices.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="8" rx="1.5"/><path d="M5 11v2M11 11v2M3 13h10"/></svg>
+        Devices
+      </a>
+      <div class="nav-section">Events</div>
+      <a href="alerts.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 2a5 5 0 0 1 5 5v3l1 1.5H2L3 10V7a5 5 0 0 1 5-5z"/><path d="M6.5 13.5a1.5 1.5 0 0 0 3 0"/></svg>
+        Alerts
+      </a>
+      <a href="logs.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M3 4h10M3 8h7M3 12h5"/></svg>
+        Logs
+      </a>
+      <div class="nav-section">System</div>
+      <a href="admin.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M3.05 12.95l1.42-1.42M11.53 4.47l1.42-1.42"/></svg>
+        Admin
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-device">ESP8266_01 · LAB A</div>
+      <div class="sidebar-footer-status"><div class="live-dot"></div>Live feed</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Admin</span>
+        <div class="topbar-sep"></div>
+        <span class="topbar-sub">Configuration</span>
+      </div>
+      <div class="topbar-right">
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+        <span class="topbar-clock" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="grid-2">
+
+        <!-- Thresholds -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Alert Thresholds</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-header">
+              <span class="form-label">CO₂ max (ppm)</span>
+              <span class="form-value" id="val-co2">1000 ppm</span>
+            </div>
+            <input type="range" id="slider-co2" min="400" max="5000" step="50" value="1000" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-header">
+              <span class="form-label">Humidity min (%)</span>
+              <span class="form-value" id="val-hummin">30 %</span>
+            </div>
+            <input type="range" id="slider-hummin" min="0" max="60" step="1" value="30" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-header">
+              <span class="form-label">Humidity max (%)</span>
+              <span class="form-value" id="val-hummax">70 %</span>
+            </div>
+            <input type="range" id="slider-hummax" min="40" max="100" step="1" value="70" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-header">
+              <span class="form-label">Temp max (°C)</span>
+              <span class="form-value" id="val-tempmax">30 °C</span>
+            </div>
+            <input type="range" id="slider-tempmax" min="15" max="60" step="0.5" value="30" />
+          </div>
+
+          <button class="btn btn--primary" id="save-btn" style="width:100%;margin-top:4px;">
+            Save Thresholds
+          </button>
+        </div>
+
+        <!-- System info -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">System Info</span>
+          </div>
+
+          <div class="sysinfo-row"><span class="sysinfo-key">Backend</span><span class="sysinfo-val">Express 4 / Node 20</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">Database</span><span class="sysinfo-val">PostgreSQL + TimescaleDB</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">Auth</span><span class="sysinfo-val">JWT + API Key (bcrypt)</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">WebSocket</span><span class="sysinfo-val">ws / native</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">Data retention</span><span class="sysinfo-val">1 year</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">Log retention</span><span class="sysinfo-val">90 days</span></div>
+          <div class="sysinfo-row"><span class="sysinfo-key">Version</span><span class="sysinfo-val">1.0.0</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initAdmin } from '../js/admin.js';
+  setInterval(() => { document.getElementById('clock').textContent = new Date().toLocaleTimeString(); }, 1000);
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+  initAdmin();
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RS Tronic — Dashboard</title>
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/charts.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ── Sidebar ───────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="assets/logo.png" alt="RS Tronic" />
+      <div class="sidebar-logo-sub">IoT Monitor</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">Monitor</div>
+
+      <a href="../index.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        Dashboard
+      </a>
+
+      <a href="pages/devices.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="8" rx="1.5"/><path d="M5 11v2M11 11v2M3 13h10"/></svg>
+        Devices
+      </a>
+
+      <div class="nav-section">Events</div>
+
+      <a href="pages/alerts.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 2a5 5 0 0 1 5 5v3l1 1.5H2L3 10V7a5 5 0 0 1 5-5z"/><path d="M6.5 13.5a1.5 1.5 0 0 0 3 0"/></svg>
+        Alerts
+        <span class="nav-badge" id="alert-count-badge">0</span>
+      </a>
+
+      <a href="pages/logs.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M3 4h10M3 8h7M3 12h5"/></svg>
+        Logs
+      </a>
+
+      <div class="nav-section">System</div>
+
+      <a href="pages/admin.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M3.05 12.95l1.42-1.42M11.53 4.47l1.42-1.42"/></svg>
+        Admin
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-device">ESP8266_01 · LAB A</div>
+      <div class="sidebar-footer-status">
+        <div class="live-dot"></div>
+        Live feed
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ──────────────────────────────────────────────── -->
+  <div class="main">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Dashboard</span>
+        <div class="topbar-sep"></div>
+        <span class="topbar-sub">Environmental Monitoring</span>
+      </div>
+      <div class="topbar-right">
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+        <span class="topbar-clock" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <div class="content stack">
+
+      <!-- Metric cards -->
+      <div class="grid-4">
+        <div class="metric-card metric-card--co2">
+          <div class="metric-label">CO₂ Level</div>
+          <div>
+            <span class="metric-value metric-value--co2" id="val-co2">—</span>
+            <span class="metric-unit">ppm</span>
+          </div>
+          <div class="metric-delta" id="delta-co2">— live</div>
+        </div>
+
+        <div class="metric-card metric-card--temp">
+          <div class="metric-label">Temperature</div>
+          <div>
+            <span class="metric-value metric-value--temp" id="val-temp">—</span>
+            <span class="metric-unit">°C</span>
+          </div>
+          <div class="metric-delta">— stable</div>
+        </div>
+
+        <div class="metric-card metric-card--hum">
+          <div class="metric-label">Humidity</div>
+          <div>
+            <span class="metric-value metric-value--hum" id="val-hum">—</span>
+            <span class="metric-unit">%</span>
+          </div>
+          <div class="metric-delta">— stable</div>
+        </div>
+
+        <div class="metric-card metric-card--ir">
+          <div class="metric-label">Motion Sensor</div>
+          <div>
+            <span class="metric-value metric-value--ir" id="val-ir">—</span>
+          </div>
+          <div class="metric-delta">Last detection: —</div>
+        </div>
+      </div>
+
+      <!-- CO2 chart + Gauge -->
+      <div class="grid-2-1">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">CO₂ — 30 min trend</span>
+            <span class="pill pill--blue" id="co2-pill">— ppm</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="co2-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Air Quality Index</span>
+            <span class="pill pill--ok" id="aq-pill">—</span>
+          </div>
+          <div class="gauge-center">
+            <svg class="gauge-svg" width="176" height="106" viewBox="0 0 176 106" overflow="visible">
+              <path d="M16 98 A72 72 0 0 1 160 98" fill="none" stroke="#1e1e24" stroke-width="14" stroke-linecap="round"/>
+              <path id="gauge-fill" d="M16 98 A72 72 0 0 1 160 98"
+                fill="none" stroke="#0078D4" stroke-width="14"
+                stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226"/>
+              <line id="gauge-needle" x1="88" y1="98" x2="88" y2="34"
+                stroke="#f0f0f4" stroke-width="1.5" stroke-linecap="round"
+                transform="rotate(-90 88 98)"/>
+              <circle cx="88" cy="98" r="4" fill="#f0f0f4"/>
+              <circle cx="88" cy="98" r="2" fill="#0c0c0e"/>
+              <text x="12"  y="114" fill="#5a5a6e" font-size="9" font-family="Barlow Condensed,sans-serif" font-weight="600">400</text>
+              <text x="82"  y="22"  fill="#5a5a6e" font-size="9" font-family="Barlow Condensed,sans-serif" font-weight="600" text-anchor="middle">1000</text>
+              <text x="162" y="114" fill="#5a5a6e" font-size="9" font-family="Barlow Condensed,sans-serif" font-weight="600" text-anchor="end">2000</text>
+              <text id="gauge-value" x="88" y="82"
+                fill="#f0f0f4" font-size="24" font-weight="800"
+                font-family="Barlow Condensed,sans-serif" text-anchor="middle">—</text>
+              <text x="88" y="95" fill="#5a5a6e" font-size="9"
+                font-family="Barlow Condensed,sans-serif" font-weight="600"
+                text-anchor="middle" letter-spacing="1">PPM CO₂</text>
+            </svg>
+            <div class="gauge-sublabel">Threshold · 1000 ppm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Temp+Hum chart + Histogram -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Temperature &amp; Humidity — 30 min</span>
+            <span class="pill">esp8266_01</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="th-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">CO₂ Distribution</span>
+            <span class="pill">24h</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="hist-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Devices table + Recent alerts -->
+      <div class="grid-2">
+        <div class="table-card">
+          <div class="card-header">
+            <span class="card-title">Devices</span>
+            <span class="pill pill--ok">1 Online</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Device</th>
+                <th>Location</th>
+                <th>Last seen</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>esp8266_01</td>
+                <td class="text-muted">Lab A – Desk 4</td>
+                <td class="text-muted" id="last-seen">—</td>
+                <td><span class="badge badge--on">Online</span></td>
+              </tr>
+              <tr>
+                <td>esp8266_02</td>
+                <td class="text-muted">Server Room</td>
+                <td class="text-muted">2h ago</td>
+                <td><span class="badge badge--off">Offline</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="card-header">
+            <span class="card-title">Recent Alerts</span>
+            <span class="pill pill--red" id="active-alerts-pill">— active</span>
+          </div>
+          <div id="dash-alerts"></div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script type="module">
+  import { initDashboard } from './js/dashboard.js';
+  import { connect }       from './js/websocket.js';
+  import { getToken }      from './js/api.js';
+
+  // Clock
+  setInterval(() => {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+  }, 1000);
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+
+  // WS
+  const token = getToken();
+  if (token) connect(token);
+
+  // Dashboard
+  initDashboard();
+</script>
+</body>
+</html>

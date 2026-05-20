@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RS Tronic — Devices</title>
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/charts.css" />
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/logo.png" alt="RS Tronic" />
+      <div class="sidebar-logo-sub">IoT Monitor</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Monitor</div>
+      <a href="../index.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="devices.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="8" rx="1.5"/><path d="M5 11v2M11 11v2M3 13h10"/></svg>
+        Devices
+      </a>
+      <div class="nav-section">Events</div>
+      <a href="alerts.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 2a5 5 0 0 1 5 5v3l1 1.5H2L3 10V7a5 5 0 0 1 5-5z"/><path d="M6.5 13.5a1.5 1.5 0 0 0 3 0"/></svg>
+        Alerts
+      </a>
+      <a href="logs.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><path d="M3 4h10M3 8h7M3 12h5"/></svg>
+        Logs
+      </a>
+      <div class="nav-section">System</div>
+      <a href="admin.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M3.05 12.95l1.42-1.42M11.53 4.47l1.42-1.42"/></svg>
+        Admin
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-device">ESP8266_01 · LAB A</div>
+      <div class="sidebar-footer-status"><div class="live-dot"></div>Live feed</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Devices</span>
+        <div class="topbar-sep"></div>
+        <span class="topbar-sub">Device Management</span>
+      </div>
+      <div class="topbar-right">
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+        <span class="topbar-clock" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="grid-3" id="devices-grid">
+        <div class="text-muted font-cond">Loading devices...</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initDevices } from '../js/devices.js';
+  setInterval(() => { document.getElementById('clock').textContent = new Date().toLocaleTimeString(); }, 1000);
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+  initDevices();
+</script>
+</body>
+</html>
